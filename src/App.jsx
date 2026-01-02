@@ -1,4 +1,12 @@
+import { useState } from "react";
+
 function App() {
+  const [X, setX] = useState(10);
+  const [Y, setY] = useState(10);
+  const [blur, setBlur] = useState(10);
+  const [range, setRange] = useState(10);
+  const [color, setColor] = useState("#000000");
+
   return (
     <div
       className="min-h-screen w-full 
@@ -10,6 +18,9 @@ px-4 sm:px-8"
       <div className="w-full max-w-6xl flex flex-col lg:flex-row items-center justify-between gap-12 lg:gap-20">
         <div className="w-full lg:flex-1 flex justify-center">
           <div
+            style={{
+              boxShadow: `${X}px ${Y}px ${blur}px ${range}px ${color}`,
+            }}
             className="bg-amber-400 
                           p-20 sm:p-28 lg:p-32 
                           rounded-3xl 
@@ -23,7 +34,7 @@ px-4 sm:px-8"
                           text-sm sm:text-base 
                           font-semibold tracking-wide"
             >
-              Box Shadow Preview
+              Box-Shadow: {X}px {Y}px {blur}px {range}px {color}
             </p>
           </div>
         </div>
@@ -43,6 +54,8 @@ px-4 sm:px-8"
             <div className="flex flex-col gap-2">
               <label className="text-black text-xs sm:text-sm">X</label>
               <input
+                onChange={(e) => setX(e.target.value)}
+                value={X}
                 type="range"
                 min="-50"
                 max="50"
@@ -53,6 +66,8 @@ px-4 sm:px-8"
             <div className="flex flex-col gap-2">
               <label className="text-black text-xs sm:text-sm">Y</label>
               <input
+                onChange={(e) => setY(e.target.value)}
+                value={Y}
                 type="range"
                 min="-50"
                 max="50"
@@ -63,9 +78,24 @@ px-4 sm:px-8"
             <div className="flex flex-col gap-2">
               <label className="text-black text-xs sm:text-sm">Blur</label>
               <input
+                onChange={(e) => setBlur(e.target.value)}
+                value={blur}
                 type="range"
                 min="0"
                 max="100"
+                className="w-full appearance-none h-2 rounded-full bg-yellow-200 cursor-pointer accent-amber-400"
+              />
+            </div>
+            <div className="flex flex-col gap-2">
+              <label className="text-black text-xs sm:text-sm">
+                Color range
+              </label>
+              <input
+                onChange={(e) => setRange(e.target.value)}
+                value={range}
+                type="range"
+                min="-50"
+                max="50"
                 className="w-full appearance-none h-2 rounded-full bg-yellow-200 cursor-pointer accent-amber-400"
               />
             </div>
@@ -74,6 +104,8 @@ px-4 sm:px-8"
                 Shadow Color
               </label>
               <input
+                onChange={(e) => setColor(e.target.value)}
+                value={color}
                 type="color"
                 className="w-9 h-9 sm:w-10 sm:h-10 rounded-lg border-none bg-transparent cursor-pointer"
               />
